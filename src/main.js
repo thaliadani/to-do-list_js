@@ -15,7 +15,7 @@ function criarElementoTarefa(texto) {
     spanTexto.innerText = texto;
 
     let botaoRemover = document.createElement("button");
-    botaoRemover.innerText = "Remover";
+    botaoRemover.innerText = "-";
     botaoRemover.className = "botao-remover"; // Adiciona uma classe para estilização
 
     // Adiciona o evento de clique para remover a tarefa da lista e salvar
