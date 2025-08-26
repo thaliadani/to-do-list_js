@@ -49,13 +49,12 @@ h1 {
     padding: .8rem;
     border-radius: 1rem;
     width: 200px;
-
-
+    font-size: 1.1rem;
 }
 
 .container input::placeholder {
     color: #000000;
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
 .container input:focus {
@@ -92,8 +91,9 @@ button:hover {
     justify-content: space-between;
     padding: 1rem;
     list-style: none;
-    border: 2px solid #000;
+    border: 3px solid #000;
     border-radius: 10px;
     width: 300px;
     box-shadow: #000 0px 5px 0px;
+    font-size: 1.2rem;
 }
