@@ -1,55 +1,72 @@
 // Seleciona os elementos HTML principais
+let inputTarefa = document.getElementById('tarefa');
 let botaoAdicionar = document.getElementById('adicionar-tarefa');
 let listaTarefas = document.getElementById('tarefas');
-let inputTarefa = document.getElementById('tarefa');
 
-/**
- * Cria um novo elemento <li> para uma tarefa, incluindo o texto e um botão de remover.
- * @param {string} texto O texto da tarefa.
- * @returns {HTMLLIElement} O elemento <li> completo.
- */
-function criarElementoTarefa(texto) {
+// Função para adicionar tarefa
+function adicionarTarefa() {
+    let textoTarefa = inputTarefa.value.trim(); // Remove espacos em branco
+
+    // Adiciona a tarefa apenas se o input não estiver vazio
+    if (textoTarefa !== "") {
+        let novoElemento = criarTarefa(textoTarefa);
+        listaTarefas.appendChild(novoElemento);
+
+        inputTarefa.value = ""; // Limpa o input
+        inputTarefa.focus();    // Foca no input para a próxima digitação
+
+        salvarTarefas(); // Salva a lista após a adição
+    }
+}
+
+// Adiciona o evento de clique para adicionar a tarefa
+botaoAdicionar.addEventListener("click", adicionarTarefa);
+
+// Função para remover tarefa
+function removerTarefa(novaTarefa) {
+    novaTarefa.remove();
+    salvarTarefas(); // Salva a lista após a remoção
+}
+
+// Função para criar o elemento da tarefa
+function criarTarefa(texto) {
+    // Cria o elemento da tarefa
     let novaTarefa = document.createElement("li");
 
+    // Cria o span para o texto da tarefa
     let spanTexto = document.createElement("span");
     spanTexto.innerText = texto;
+    // Adiciona o span ao elemento da tarefa
+    novaTarefa.appendChild(spanTexto);
 
+    // Cria o botão remover tarefa
     let botaoRemover = document.createElement("button");
     botaoRemover.innerText = "-";
-    botaoRemover.className = "botao-remover"; // Adiciona uma classe para estilização
 
-    // Adiciona o evento de clique para remover a tarefa da lista e salvar
-    botaoRemover.addEventListener("click", () => {
-        novaTarefa.remove();
-        salvarTarefas(); // Salva a lista após a remoção
-    });
+    // Adiciona o evento de clique para remover a tarefa da lista
+    botaoRemover.addEventListener("click", () => removerTarefa(novaTarefa));
 
-    novaTarefa.appendChild(spanTexto);
     novaTarefa.appendChild(botaoRemover);
 
     return novaTarefa;
 }
 
-/**
- * Salva todas as tarefas da lista no localStorage do navegador.
- */
+// Salva as tarefas no localStorage
 function salvarTarefas() {
     let tarefas = [];
     // Pega todos os spans que contêm o texto das tarefas
     let itensDaLista = document.querySelectorAll('#tarefas li span');
-    
+
     // Itera sobre os spans e adiciona o texto ao array
     itensDaLista.forEach(item => {
         tarefas.push(item.innerText);
     });
-    
+
     // Converte o array em uma string JSON e armazena no localStorage
     localStorage.setItem('minhasTarefas', JSON.stringify(tarefas));
 }
 
-/**
- * Carrega as tarefas salvas no localStorage e as exibe na página.
- */
+// Carrega as tarefas salvas do localStorage
 function carregarTarefas() {
     // Pega as tarefas armazenadas, se houver
     let tarefasSalvas = localStorage.getItem('minhasTarefas');
@@ -57,33 +74,20 @@ function carregarTarefas() {
     if (tarefasSalvas) {
         // Converte a string JSON de volta para um array
         let tarefas = JSON.parse(tarefasSalvas);
-        
+
         // Para cada tarefa no array, cria o elemento e o adiciona à lista
         tarefas.forEach(textoTarefa => {
-            let novoElemento = criarElementoTarefa(textoTarefa);
+            let novoElemento = criarTarefa(textoTarefa);
             listaTarefas.appendChild(novoElemento);
         });
     }
 }
 
-// --- Event Listeners ---
+function limparTarefas() {
+    // Limpa o localStorage e a lista de tarefas
+    localStorage.removeItem('minhasTarefas');
+    listaTarefas.innerHTML = '';
+}
 
-// 1. Evento para o botão de adicionar tarefa
-botaoAdicionar.addEventListener("click", () => {
-    // .trim() remove espaços em branco no início e no fim
-    let textoTarefa = inputTarefa.value.trim();
-
-    // Adiciona a tarefa apenas se o input não estiver vazio
-    if (textoTarefa !== "") {
-        let novoElemento = criarElementoTarefa(textoTarefa);
-        listaTarefas.appendChild(novoElemento);
-
-        inputTarefa.value = ""; // Limpa o input
-        inputTarefa.focus();    // Foca no input para a próxima digitação
-        
-        salvarTarefas(); // Salva a lista após adicionar uma nova tarefa
-    }
-});
-
-// 2. Evento para carregar as tarefas quando a página é completamente carregada
+// Evento para carregar as tarefas quando a página é completamente carregada
 document.addEventListener("DOMContentLoaded", carregarTarefas);
