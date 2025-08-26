@@ -83,6 +83,7 @@ function carregarTarefas() {
     }
 }
 
+// Limpa as tarefas e o localStorage
 function limparTarefas() {
     // Limpa o localStorage e a lista de tarefas
     localStorage.removeItem('minhasTarefas');
