@@ -1,4 +1,4 @@
-// Seleciona os elementos HTML principais
+// Seleciona os elementos HTML pelo id
 let inputTarefa = document.getElementById('tarefa');
 let botaoAdicionar = document.getElementById('adicionar-tarefa');
 let listaTarefas = document.getElementById('tarefas');
@@ -16,12 +16,17 @@ function adicionarTarefa() {
         inputTarefa.focus();    // Foca no input para a próxima digitação
 
         salvarTarefas(); // Salva a lista após a adição
+    }else{
+    // Feedback visual para usuário
+    inputTarefa.placeholder = "Digite algo primeiro!";
+    inputTarefa.classList.add('erro');
+    setTimeout(() => {
+        inputTarefa.classList.remove('erro');
+        inputTarefa.placeholder = "Digite uma tarefa...";
+    }, 2000);
+        
     }
 }
-
-// Adiciona o evento de clique para adicionar a tarefa
-botaoAdicionar.addEventListener("click", adicionarTarefa);
-
 // Função para remover tarefa
 function removerTarefa(novaTarefa) {
     novaTarefa.remove();
@@ -83,12 +88,8 @@ function carregarTarefas() {
     }
 }
 
-// Limpa as tarefas e o localStorage
-function limparTarefas() {
-    // Limpa o localStorage e a lista de tarefas
-    localStorage.removeItem('minhasTarefas');
-    listaTarefas.innerHTML = '';
-}
+// Adiciona o evento de clique para adicionar a tarefa
+botaoAdicionar.addEventListener("click", adicionarTarefa);
 
 // Evento para carregar as tarefas quando a página é completamente carregada
 document.addEventListener("DOMContentLoaded", carregarTarefas);
