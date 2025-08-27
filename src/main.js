@@ -16,13 +16,15 @@ function adicionarTarefa() {
         inputTarefa.focus(); // Foca no input para a próxima digitação
 
         salvarTarefas(); // Salva a lista após a adição
-    }else{
-    // Feedback visual para usuário
-    inputTarefa.placeholder = "Digite algo primeiro!";
-    setTimeout(() => {
-        inputTarefa.placeholder = "Digite uma tarefa...";
-    }, 2000);
-        
+    } else {
+        // Feedback visual para usuário
+        inputTarefa.placeholder = "Digite algo primeiro!";
+        //Adiciona cor no placeholder
+        inputTarefa.classList.add('erro');
+        setTimeout(() => {
+            inputTarefa.placeholder = "Digite uma tarefa";
+            inputTarefa.classList.remove('erro')
+        }, 2000);
     }
 }
 
@@ -40,7 +42,7 @@ function criarTarefa(texto) {
     // Cria o span para o texto da tarefa
     let spanTexto = document.createElement("span");
     spanTexto.innerText = texto;
-    
+
     // Adiciona o span ao elemento da tarefa
     novaTarefa.appendChild(spanTexto);
 
@@ -48,8 +50,11 @@ function criarTarefa(texto) {
     let botaoRemover = document.createElement("button");
     botaoRemover.innerText = "-";
 
-    // Adiciona o evento de clique para remover a tarefa da lista
+    // Evento de clique para remover a tarefa da lista
     botaoRemover.addEventListener("click", () => removerTarefa(novaTarefa));
+
+    // Evento de clique duplo no texto para remover a tarefa
+    spanTexto.addEventListener("dblclick", () => removerTarefa(novaTarefa));
 
     novaTarefa.appendChild(botaoRemover);
 
