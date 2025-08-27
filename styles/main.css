@@ -98,6 +98,6 @@ button:hover {
    font-size: 1.2rem;
 }
 
-.erro::placeholder{
+.erro input::placeholder{
     color:red;
 }
