@@ -1,7 +1,36 @@
 // Seleciona os elementos HTML pelo id
+let inputBuscar = document.getElementById('buscar');
+let botaoBuscar = document.getElementById('buscar-tarefas');
+
 let inputTarefa = document.getElementById('tarefa');
 let botaoAdicionar = document.getElementById('adicionar-tarefa');
 let listaTarefas = document.getElementById('tarefas');
+
+let botaoLimpar = document.getElementById("limpar-tarefas");
+
+//buscar a tarefa digitada
+function buscarTarefas() {
+    // filtra o valor do inputBuscar para texto minusculo
+    const filtro = inputBuscar.value.toLowerCase();
+
+    //Seleciona todas as tarefas da lista
+    const todasAsTarefas = listaTarefas.querySelectorAll('li');
+
+    //Itera cada tarefa
+    todasAsTarefas.forEach(tarefa => {
+
+        //Seleciona cada uma das tarefas e converte para minusculo
+        const textoTarefa = tarefa.querySelector('span').textContent.toLowerCase();
+        
+        //Verifica se encontra a tarefa digitada, caso aparecer mostra na lista de tarefas e esconde o restante
+        if (textoTarefa.includes(filtro)) {
+            tarefa.style.display = '';
+        } else {
+            tarefa.style.display = 'none';
+        }
+    });
+
+}
 
 // Função para adicionar tarefa
 function adicionarTarefa() {
@@ -91,7 +120,18 @@ function carregarTarefas() {
             listaTarefas.appendChild(novoElemento);
         });
     }
+
 }
+
+function limparTarefas() {
+    listaTarefas.remove();
+    salvarTarefas();
+    setTimeout(() => {
+        location.reload();
+    }, 0)
+}
+
+botaoBuscar.addEventListener("click", buscarTarefas);
 
 // Adiciona o evento de clique para adicionar a tarefa
 botaoAdicionar.addEventListener("click", adicionarTarefa);
@@ -102,6 +142,8 @@ inputTarefa.addEventListener("keydown", (event) => {
         adicionarTarefa();
     }
 })
+
+botaoLimpar.addEventListener("click", limparTarefas);
 
 // Evento para carregar as tarefas quando a página é completamente carregada
 document.addEventListener("DOMContentLoaded", carregarTarefas);
