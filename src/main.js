@@ -50,9 +50,11 @@ function adicionarTarefa() {
         inputTarefa.placeholder = "Digite algo primeiro!";
         //Adiciona cor no placeholder
         inputTarefa.classList.add('erro');
+        inputTarefa.classList.add('wobble-hor-bottom')
         setTimeout(() => {
             inputTarefa.placeholder = "Digite uma tarefa";
             inputTarefa.classList.remove('erro')
+            inputTarefa.classList.remove('wobble-hor-bottom')
         }, 2000);
     }
 }
