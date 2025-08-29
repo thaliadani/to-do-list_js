@@ -21,7 +21,7 @@ function buscarTarefas() {
 
         //Seleciona cada uma das tarefas e converte para minusculo
         const textoTarefa = tarefa.querySelector('span').textContent.toLowerCase();
-        
+
         //Verifica se encontra a tarefa digitada, caso aparecer mostra na lista de tarefas e esconde o restante
         if (textoTarefa.includes(filtro)) {
             tarefa.style.display = '';
@@ -79,7 +79,7 @@ function criarTarefa(texto) {
 
     // Cria o botão remover tarefa
     let botaoRemover = document.createElement("button");
-    
+
     let svgNS = "http://www.w3.org/2000/svg";
     let imagemRemover = document.createElementNS(svgNS, "svg");
     imagemRemover.setAttribute("xmlns", svgNS);
