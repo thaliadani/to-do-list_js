@@ -80,12 +80,15 @@ h1 {
     outline: none;
 }
 
-button {
+.container button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     border: none;
     background-color: #000;
     color: #fff;
-    padding: .5rem;
     border-radius: 10px;
     cursor: pointer;
     width: 40px;
@@ -93,9 +96,23 @@ button {
     font-weight: bold;
 }
 
+#limpar-tarefas{
+    padding: .5rem;
+}
+
 button:hover {
     background-color: #fff;
     color: #000;
+}
+
+svg{
+    cursor: pointer;
+    fill: #ffffff;
+    padding: .5rem;
+}
+
+svg:hover {
+    fill: #000000;
 }
 
 #tarefas {

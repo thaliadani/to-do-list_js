@@ -77,7 +77,15 @@ function criarTarefa(texto) {
 
     // Cria o botão remover tarefa
     let botaoRemover = document.createElement("button");
-    botaoRemover.innerText = "-";
+    
+    let svgNS = "http://www.w3.org/2000/svg";
+    let imagemRemover = document.createElementNS(svgNS, "svg");
+    imagemRemover.setAttribute("xmlns", svgNS);
+    imagemRemover.setAttribute("viewBox", "0 0 640 640");
+    let path = document.createElementNS(svgNS, "path");
+    path.setAttribute("d", "M96 320c0-17.7 14.3-32 32-32h384c17.7 0 32 14.3 32 32s-14.3 32-32 32H128c-17.7 0-32-14.3-32-32z");
+    imagemRemover.appendChild(path);
+    botaoRemover.appendChild(imagemRemover);
 
     // Evento de clique para remover a tarefa da lista
     botaoRemover.addEventListener("click", () => removerTarefa(novaTarefa));
