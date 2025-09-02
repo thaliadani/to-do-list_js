@@ -1,9 +1,11 @@
 # ✅ Lista de Tarefas
+
 ## 💻 Tecnologias
 Este projeto foi construído com as seguintes linguagens:
 - HTML
 - CSS
 - JavaScript
+
 ## 🚀 Funcionalidades
 Com esta aplicação, você pode:
 - Adicionar uma tarefa: Crie novas atividades para sua lista.
